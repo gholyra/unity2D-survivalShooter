@@ -1,16 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float velocity;
+
+    public static Player instance;
+
+    [SerializeField] private float velocity = 10;
+    [SerializeField] private int lives = 3;
 
     private Animator animator;
-    private Transform playerTransform;
+    public Transform playerTransform { get; private set; }
 
     private void Awake()
     {
+        if (instance == null)
+        { 
+            instance = this;
+        }
+        else
+        { 
+            Destroy(this.gameObject);
+        }
         animator = GetComponent<Animator>();
         playerTransform = GetComponent<Transform>();
     }
@@ -24,10 +34,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        float moveX = Input.GetAxis("Horizontal") * velocity * Time.deltaTime;
-        float moveY = Input.GetAxis("Vertical") * velocity * Time.deltaTime;
-
+        float moveX = Input.GetAxisRaw("Horizontal") * velocity * Time.deltaTime;
+        float moveY = Input.GetAxisRaw("Vertical") * velocity * Time.deltaTime;
         playerTransform.Translate(moveX, moveY, 0f);
+        if (lives <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        lives--;
     }
 
 }
