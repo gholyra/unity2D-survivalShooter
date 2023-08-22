@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -15,16 +17,14 @@ public class Enemy : MonoBehaviour
         enemyTransform = GetComponent<Transform>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        targetPosition = Player.instance.playerTransform.position;
+        targetPosition = PlayerInfo.instance.playerTransform.position;
         enemyTransform.position = Vector3.MoveTowards(enemyTransform.position, targetPosition, velocity * Time.deltaTime);
     }
 }

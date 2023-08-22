@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 7270763543911404002}
   - component: {fileID: 3163724085593475813}
   - component: {fileID: 7307069810291394040}
-  - component: {fileID: 9115979823035653381}
+  - component: {fileID: 8479622639215574285}
+  - component: {fileID: 3288950045904872009}
+  - component: {fileID: 4197801885019418946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -153,7 +155,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &9115979823035653381
+--- !u!114 &8479622639215574285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,8 +164,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 3671623472991316342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d43b35f4c25db429edc11c350d179a, type: 3}
+  m_Script: {fileID: 11500000, guid: ac97cd25f8aa5524a85299b8ade73c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 10
-  lives: 3
+  playerLives: 3
+  playerVelocity: 10
+--- !u!114 &3288950045904872009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3671623472991316342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970fcbf712453e142866e45527bf3da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4197801885019418946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3671623472991316342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1763bfc4e99cab54da7bd4b0f24fcdf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
