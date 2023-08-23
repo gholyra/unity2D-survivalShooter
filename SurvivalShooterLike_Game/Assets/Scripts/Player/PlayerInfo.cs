@@ -9,10 +9,12 @@ public class PlayerInfo : MonoBehaviour
 
     [SerializeField] private int playerLives = 3;
     [SerializeField] private float playerVelocity = 10;
-
+    
     public Animator playerAnimator { get; private set; }
 
     public Transform playerTransform { get; set; }
+
+    public SpriteRenderer spriteRenderer { get; private set; }
 
     public bool isMoving { get; set; }
     public bool isHurt { get; set; }
@@ -31,6 +33,7 @@ public class PlayerInfo : MonoBehaviour
         #endregion
         playerTransform = GetComponent<Transform>();
         playerAnimator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
