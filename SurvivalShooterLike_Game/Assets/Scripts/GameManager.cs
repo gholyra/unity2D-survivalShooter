@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int gameScore { get; private set; } 
+    public int playerLives { get; private set; } 
+
     private void Awake()
     {
         #region Singleton
@@ -26,6 +29,18 @@ public class GameManager : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         mousePosition.z = 0;
         return mousePosition;
+    }
+
+    public void SetGameScore(int score)
+    {
+        this.gameScore = score;
+        UIManager.instance.SetScoreText(this.gameScore);
+    }
+
+    public void SetPlayerLife(int life)
+    {
+        this.playerLives = life;
+        UIManager.instance.SetLivesText(this.playerLives);
     }
 
 }

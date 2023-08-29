@@ -34,16 +34,7 @@ public class PlayerInfo : MonoBehaviour
         playerTransform = GetComponent<Transform>();
         playerAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        GameManager.instance.SetPlayerLife(playerLives);
     }
 
     #region Handlers
@@ -51,6 +42,7 @@ public class PlayerInfo : MonoBehaviour
     {
         isHurt = true;
         playerLives--;
+        GameManager.instance.SetPlayerLife(playerLives);
         if (playerLives <= 0)
         {
             Destroy(this.gameObject);
@@ -60,7 +52,8 @@ public class PlayerInfo : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        LifeHandler();
+        if (collision.collider.tag == "Enemy")
+            LifeHandler();
     }
 
     public float GetPlayerVelocity()
