@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
 
     public void SetGameScore(int score)
     {
-        this.gameScore = score;
+        this.gameScore += score;
+        PlayerInfo.instance.SetCurrentXP(score);
         UIManager.instance.SetScoreText(this.gameScore);
     }
 
@@ -41,6 +42,12 @@ public class GameManager : MonoBehaviour
     {
         this.playerLives = life;
         UIManager.instance.SetLivesText(this.playerLives);
+    }
+
+    public void SetNewXPInfo(int currentPlayerLevel, int currentXP, int toLevelUpXP)
+    {
+        UIManager.instance.SetXPInfoText(currentXP, toLevelUpXP);
+        UIManager.instance.SetPlayerLevelText(currentPlayerLevel);
     }
 
 }

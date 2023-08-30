@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class PlayerInfo : MonoBehaviour
 
     public bool isMoving { get; set; }
     public bool isHurt { get; set; }
+    public int playerLevel { get; private set; } = 0;
+    public int currentPlayerXP { get; set; } = 0;
+    public int toLevelUpXP { get; set; } = 5;
 
     private void Awake()
     {
@@ -34,7 +38,12 @@ public class PlayerInfo : MonoBehaviour
         playerTransform = GetComponent<Transform>();
         playerAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         GameManager.instance.SetPlayerLife(playerLives);
+        GameManager.instance.SetNewXPInfo(playerLevel, currentPlayerXP, toLevelUpXP);
     }
 
     #region Handlers
@@ -49,7 +58,7 @@ public class PlayerInfo : MonoBehaviour
         }
     }
     #endregion
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Enemy")
@@ -61,4 +70,20 @@ public class PlayerInfo : MonoBehaviour
         return this.playerVelocity;
     }
 
+    public void SetCurrentXP(int xpToAdd)
+    {
+        currentPlayerXP += xpToAdd;
+        CheckLevelUp();
+    }
+
+    private void CheckLevelUp()
+    {
+        if (currentPlayerXP >= toLevelUpXP)
+        {
+            playerLevel++;
+            currentPlayerXP -= toLevelUpXP;
+            toLevelUpXP += 5;
+        }
+        GameManager.instance.SetNewXPInfo(playerLevel, currentPlayerXP, toLevelUpXP);
+    }
 }
