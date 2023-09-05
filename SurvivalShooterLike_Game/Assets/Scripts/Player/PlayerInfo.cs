@@ -43,26 +43,33 @@ public class PlayerInfo : MonoBehaviour
     private void Start()
     {
         GameManager.instance.SetPlayerLife(playerLives);
-        GameManager.instance.SetNewXPInfo(playerLevel, currentPlayerXP, toLevelUpXP);
+        GameManager.instance.SetPlayerLevel(playerLevel, currentPlayerXP, toLevelUpXP);
     }
 
     #region Handlers
-    private void LifeHandler()
+    public void LifeHandler(int value)
     {
-        isHurt = true;
-        playerLives--;
-        GameManager.instance.SetPlayerLife(playerLives);
-        if (playerLives <= 0)
+        if (value > 0)
         {
-            Destroy(this.gameObject);
+            playerLives += value;
         }
+        else
+        {
+            isHurt = true;
+            playerLives += value;
+            if (playerLives <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        GameManager.instance.SetPlayerLife(playerLives);
     }
     #endregion
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Enemy")
-            LifeHandler();
+            LifeHandler(-1);
     }
 
     public float GetPlayerVelocity()
@@ -83,7 +90,8 @@ public class PlayerInfo : MonoBehaviour
             playerLevel++;
             currentPlayerXP -= toLevelUpXP;
             toLevelUpXP += 5;
+            GameManager.instance.OnLevelUp();
         }
-        GameManager.instance.SetNewXPInfo(playerLevel, currentPlayerXP, toLevelUpXP);
+        GameManager.instance.SetPlayerLevel(playerLevel, currentPlayerXP, toLevelUpXP);
     }
 }
