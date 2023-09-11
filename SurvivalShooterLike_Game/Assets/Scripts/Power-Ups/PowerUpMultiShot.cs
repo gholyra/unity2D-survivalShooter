@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +15,8 @@ public class PowerUpMultiShot : MonoBehaviour
     [SerializeField] private Sprite icon;
 
     [Header ("Prefab Child Components")]
-    private Image powerUpIcon;
-    private TextMeshProUGUI powerUpNameText;
+    [SerializeField] private TextMeshProUGUI powerUpNameText;
+    [SerializeField] private Image powerUpIcon;
 
     private void Awake()
     {
@@ -28,5 +30,7 @@ public class PowerUpMultiShot : MonoBehaviour
         PlayerWeapon.instance.multiShot = true;
         Time.timeScale = 1;
         UIManager.instance.SetPowerUpContainer(false);
+        UIManager.instance.GetPowerUpContainer().GetComponent<PowerUpContainer>().GetMultiShotPowerUp().gameObject.SetActive(false);
+
     }
 }

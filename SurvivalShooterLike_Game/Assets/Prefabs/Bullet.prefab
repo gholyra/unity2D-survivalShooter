@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 687198258565458511}
   - component: {fileID: 8881664753478341131}
   - component: {fileID: 115831127796906093}
-  - component: {fileID: -5226884882629242729}
+  - component: {fileID: 9192649762693401978}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 4107990798509685787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 0.1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8881664753478341131
 SpriteRenderer:
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletVelocity: 16
   bulletLifeTime: 2
---- !u!58 &-5226884882629242729
-CircleCollider2D:
+--- !u!70 &9192649762693401978
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,6 +132,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: -0.0039311247, y: -0.0550357}
+  m_Size: {x: 0.92725116, y: 1.2181535}
+  m_Direction: 0

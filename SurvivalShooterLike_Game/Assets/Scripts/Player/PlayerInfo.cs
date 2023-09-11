@@ -9,7 +9,7 @@ public class PlayerInfo : MonoBehaviour
     public static PlayerInfo instance;
 
     [SerializeField] private int playerLives = 3;
-    [SerializeField] private float playerVelocity = 6;
+    [SerializeField] private float playerVelocity = 10;
     
     public Animator playerAnimator { get; private set; }
 

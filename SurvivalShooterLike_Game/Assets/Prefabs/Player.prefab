@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLives: 3
-  playerVelocity: 6
+  playerVelocity: 10
 --- !u!114 &3288950045904872009
 MonoBehaviour:
   m_ObjectHideFlags: 0

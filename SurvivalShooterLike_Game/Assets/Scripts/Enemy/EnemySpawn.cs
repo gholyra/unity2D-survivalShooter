@@ -4,26 +4,40 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
 
+    public static EnemySpawn instance;
+
     [SerializeField] Vector2 minSpawnPosition, maxSpawnPosition;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] float timeToSpawn = 1.5f;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnEnemies(timeToSpawn));
     }
 
-    // Update is called once per frame
-    void Update()
+    public float GetTimeToSpawn()
     {
-        
+        return timeToSpawn;
+    } 
+    
+    public void SubtractTimeToSpawn(float value)
+    {
+        timeToSpawn -= value;
     }
 
-    private IEnumerator SpawnEnemies()
+    private IEnumerator SpawnEnemies(float timeToSpawn)
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(timeToSpawn);
             float xPosition = Random.Range(minSpawnPosition.x, maxSpawnPosition.x);
             float yPosition = Random.Range(minSpawnPosition.y, maxSpawnPosition.y);
             Instantiate(enemyPrefab, new Vector2(xPosition, yPosition), Quaternion.identity);

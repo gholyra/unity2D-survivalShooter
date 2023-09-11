@@ -9,12 +9,12 @@ public class PowerUpLifePlus : MonoBehaviour
 {
     [Header ("Power Up Info")]
     [SerializeField] private Button button;
-    [SerializeField] private string name;
+    [SerializeField] private new string name;
     [SerializeField] private Sprite icon;
 
     [Header ("Prefab Child Components")]
-    private Image powerUpIcon;
-    private TextMeshProUGUI powerUpNameText;
+    [SerializeField] private TextMeshProUGUI powerUpNameText;
+    [SerializeField] private Image powerUpIcon;
 
     private void Awake()
     {

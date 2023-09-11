@@ -13,8 +13,8 @@ public class PowerUpVelocityPlus : MonoBehaviour
     [SerializeField] private Sprite icon;
 
     [Header ("Prefab Child Components")]
-    private Image powerUpIcon;
-    private TextMeshProUGUI powerUpNameText;
+    [SerializeField] private TextMeshProUGUI powerUpNameText;
+    [SerializeField] private Image powerUpIcon;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class PowerUpVelocityPlus : MonoBehaviour
 
     private void VelocityIncrease()
     {
-        PlayerInfo.instance.SetPlayerVelocity(3f);
+        PlayerInfo.instance.SetPlayerVelocity(2f);
         Time.timeScale = 1;
         UIManager.instance.SetPowerUpContainer(false);
     }

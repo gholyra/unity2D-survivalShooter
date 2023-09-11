@@ -54,5 +54,9 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         UIManager.instance.SetPowerUpContainer(true);
+        if (EnemySpawn.instance.GetTimeToSpawn() >= 1f)
+        {
+            EnemySpawn.instance.SubtractTimeToSpawn(0.010f);
+        }
     }
 }
