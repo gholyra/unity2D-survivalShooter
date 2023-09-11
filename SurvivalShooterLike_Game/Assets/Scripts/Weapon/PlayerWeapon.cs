@@ -19,7 +19,7 @@ public class PlayerWeapon : MonoBehaviour
     private void Update()
     {
         AimHandler();
-        ShootingHandler();
+        ShootingHandler(true);
     }
 
     #region Handlers
@@ -36,6 +36,16 @@ public class PlayerWeapon : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Instantiate(bulletPrefab, weapon.position, weapon.rotation);
+        }
+    }   
+
+    private void ShootingHandler(bool multiPowerUp)
+    {
+        if (Input.GetButtonDown("Fire1") && multiPowerUp)
+        {
+            Instantiate(bulletPrefab, weapon.position, weapon.rotation);
+            Instantiate(bulletPrefab, weapon.position, Quaternion.Euler(0f, 0f, -60f));
+            Instantiate(bulletPrefab, weapon.position, Quaternion.Euler(0f, 0f, -120f));
         }
     }
     #endregion
