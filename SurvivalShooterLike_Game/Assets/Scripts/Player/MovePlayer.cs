@@ -17,11 +17,11 @@ public class MovePlayer : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical") * PlayerInfo.instance.GetPlayerVelocity() * Time.deltaTime;
         PlayerInfo.instance.playerTransform.Translate(new Vector2(moveX, moveY).normalized * PlayerInfo.instance.GetPlayerVelocity() * Time.deltaTime);
         PlayerInfo.instance.isMoving = moveX != 0 || moveY != 0;
-        FlipSprite(moveX);
+        FlipPlayerSprite(moveX);
     }
     #endregion
 
-    private void FlipSprite(float moveX)
+    private void FlipPlayerSprite(float moveX)
     {
         if (moveX < 0)
         {

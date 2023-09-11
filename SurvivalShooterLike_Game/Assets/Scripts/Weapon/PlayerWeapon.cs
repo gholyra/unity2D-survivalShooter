@@ -5,21 +5,34 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
 
+    public static PlayerWeapon instance;
+
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform weapon;
 
-    private Transform aimTransform;
+    public Transform aimTransform { get; private set; }
 
+    public bool multiShot { get; set; } = false;
 
     private void Awake()
     {
+        #region Singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        #endregion
         aimTransform = GetComponent<Transform>();
     }
 
     private void Update()
     {
         AimHandler();
-        ShootingHandler(true);
+        if (multiShot)
+        {
+            MultiShootingHandler();
+        }
+        SingleShootingHandler();
     }
 
     #region Handlers
@@ -29,24 +42,41 @@ public class PlayerWeapon : MonoBehaviour
         Vector3 aimDirection = (mousePosition - transform.position).normalized;
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
+        FlipSpritesToAimDirection(aimDirection);
     }
 
-    private void ShootingHandler()
+    private void SingleShootingHandler()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bulletPrefab, weapon.position, weapon.rotation);
+            Instantiate(bulletPrefab, weapon.position, weapon.rotation.normalized);
         }
+
     }   
 
-    private void ShootingHandler(bool multiPowerUp)
+    private void MultiShootingHandler()
     {
-        if (Input.GetButtonDown("Fire1") && multiPowerUp)
+        if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bulletPrefab, weapon.position, weapon.rotation);
-            Instantiate(bulletPrefab, weapon.position, Quaternion.Euler(0f, 0f, -60f));
-            Instantiate(bulletPrefab, weapon.position, Quaternion.Euler(0f, 0f, -120f));
+            Instantiate(bulletPrefab, weapon.position, weapon.rotation.normalized);
+            Instantiate(bulletPrefab, weapon.position, weapon.rotation.normalized * Quaternion.Euler(0f, 0f, 15f));
+            Instantiate(bulletPrefab, weapon.position, weapon.rotation.normalized * Quaternion.Euler(0f, 0f, -15f));
         }
     }
     #endregion
+
+    private void FlipSpritesToAimDirection(Vector3 aimDirection)
+    {
+        if (aimDirection.x < 0)
+        {
+            PlayerInfo.instance.spriteRenderer.flipX = true;
+            weapon.GetComponent<SpriteRenderer>().flipY = true;
+        }
+        else if (aimDirection.x > 0)
+        {
+            PlayerInfo.instance.spriteRenderer.flipX = false;
+            weapon.GetComponent<SpriteRenderer>().flipY = false;
+        }
+    }
+
 }

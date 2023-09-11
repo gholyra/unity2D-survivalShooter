@@ -9,7 +9,7 @@ public class PlayerInfo : MonoBehaviour
     public static PlayerInfo instance;
 
     [SerializeField] private int playerLives = 3;
-    [SerializeField] private float playerVelocity = 10;
+    [SerializeField] private float playerVelocity = 6;
     
     public Animator playerAnimator { get; private set; }
 
@@ -75,6 +75,11 @@ public class PlayerInfo : MonoBehaviour
     public float GetPlayerVelocity()
     {
         return this.playerVelocity;
+    }
+
+    public void SetPlayerVelocity(float value)
+    {
+        playerVelocity += value;
     }
 
     public void SetCurrentXP(int xpToAdd)

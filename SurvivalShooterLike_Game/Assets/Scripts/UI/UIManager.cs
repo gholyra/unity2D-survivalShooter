@@ -42,6 +42,11 @@ public class UIManager : MonoBehaviour
         SetPowerUpContainer(false);
     }
 
+    public Transform GetPowerUpContainer() 
+    { 
+        return powerUpContainer; 
+    }
+
     public void SetPowerUpContainer(bool isActive)
     {
         powerUpContainer.gameObject.SetActive(isActive);
